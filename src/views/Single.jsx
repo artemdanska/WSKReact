@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import {useLocation, useNavigate} from 'react-router';
 
-const SingleView = (props) => {
-  const {item, setSelectedItem} = props;
+const Single = () => {
+  const {state} = useLocation();
+  const item = state.item;
+  const navigate = useNavigate();
 
-  if (!item) return null;
   return (
-    <dialog open className="singleView">
+    <div>
       <h2>{item.title}</h2>
       <p>{item.description}</p>
 
@@ -21,14 +21,9 @@ const SingleView = (props) => {
         <p>Unsupported media type.</p>
       )}
 
-      <button onClick={() => setSelectedItem(null)}>Close</button>
-    </dialog>
+      <button onClick={() => navigate(-1)}>Go back</button>
+    </div>
   );
 };
 
-SingleView.propTypes = {
-  item: PropTypes.object,
-  setSelectedItem: PropTypes.func.isRequired,
-};
-
-export default SingleView;
+export default Single;
