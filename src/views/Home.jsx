@@ -7,9 +7,20 @@ const Home = () => {
 
   const getMedia = async () => {
     try {
-      const json = await fetchData('test.json');
-      setMediaArray(json);
-      console.log(json);
+      const mediaUrl = import.meta.env.VITE_MEDIA_API + '/media';
+      const mediaItems = await fetchData(mediaUrl);
+
+      const newArray = await Promise.all(
+        mediaItems.map(async (item) => {
+          const userUrl =
+            import.meta.env.VITE_AUTH_API + '/users/' + item.user_id;
+          const result = await fetchData(userUrl);
+          return {...item, username: result.username};
+        }),
+      );
+
+      console.log(newArray);
+      setMediaArray(newArray);
     } catch (error) {
       console.error(error);
     }
@@ -32,6 +43,7 @@ const Home = () => {
             <th>Created</th>
             <th>Size</th>
             <th>Type</th>
+            <th>Username</th>
             <th>Actions</th>
           </tr>
         </thead>
