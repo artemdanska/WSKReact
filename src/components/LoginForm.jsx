@@ -1,30 +1,30 @@
-import useForm from '../hooks/formHooks';
-import {useAuthentication} from '../hooks/authHooks';
+import useForm from "../hooks/formHooks";
+import { useAuthentication } from "../hooks/apiHooks";
 
 const LoginForm = () => {
-  const {postLogin} = useAuthentication();
+  const { postLogin } = useAuthentication();
 
   const initValues = {
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   };
 
   const doLogin = (inputs) => {
     postLogin(inputs)
       .then((result) => {
-        console.log('Login successful:', result);
+        console.log("Login successful:", result);
         if (result.token) {
-          localStorage.setItem('token', result.token);
+          localStorage.setItem("token", result.token);
         }
       })
       .catch((error) => {
-        console.error('Login failed:', error);
+        console.error("Login failed:", error);
       });
   };
 
-  const {inputs, handleInputChange, handleSubmit} = useForm(
+  const { inputs, handleInputChange, handleSubmit } = useForm(
     () => doLogin(inputs),
-    initValues,
+    initValues
   );
 
   console.log(inputs);
