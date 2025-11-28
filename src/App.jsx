@@ -1,12 +1,12 @@
-import './App.css';
-import {BrowserRouter, Routes, Route} from 'react-router';
-import Layout from './components/Layout';
-import Home from './views/Home';
-import Profile from './views/Profile';
-import Upload from './views/Upload';
-import Single from './views/Single';
-import Login from './views/Login';
-import Logout from './views/Logout';
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router";
+import Layout from "./components/Layout";
+import Home from "./views/Home";
+import Profile from "./views/Profile";
+import Upload from "./views/Upload";
+import Single from "./views/Single";
+import Login from "./views/Login";
+import Logout from "./views/Logout";
 
 const App = () => {
   return (

@@ -1,22 +1,22 @@
-import {useState, useEffect} from 'react';
-import MediaRow from '../components/MediaRow';
-import {fetchData} from '../utils/fetchData';
+import { useState, useEffect } from "react";
+import MediaRow from "../components/MediaRow";
+import { fetchData } from "../utils/fetchData";
 
 const Home = () => {
   const [mediaArray, setMediaArray] = useState([]);
 
   const getMedia = async () => {
     try {
-      const mediaUrl = import.meta.env.VITE_MEDIA_API + '/media';
+      const mediaUrl = import.meta.env.VITE_MEDIA_API + "/media";
       const mediaItems = await fetchData(mediaUrl);
 
       const newArray = await Promise.all(
         mediaItems.map(async (item) => {
           const userUrl =
-            import.meta.env.VITE_AUTH_API + '/users/' + item.user_id;
+            import.meta.env.VITE_AUTH_API + "/users/" + item.user_id;
           const result = await fetchData(userUrl);
-          return {...item, username: result.username};
-        }),
+          return { ...item, username: result.username };
+        })
       );
 
       console.log(newArray);

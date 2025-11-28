@@ -1,7 +1,7 @@
-import {useLocation, useNavigate} from 'react-router';
+import { useLocation, useNavigate } from "react-router";
 
 const Single = () => {
-  const {state} = useLocation();
+  const { state } = useLocation();
   const item = state.item;
   const navigate = useNavigate();
 
@@ -11,9 +11,9 @@ const Single = () => {
       <p>{item.description}</p>
       <p>Username: {item.username}</p>
 
-      {item.media_type.startsWith('image/') ? (
+      {item.media_type.startsWith("image/") ? (
         <img src={item.filename} alt={item.title} width="450" />
-      ) : item.media_type.startsWith('video/') ? (
+      ) : item.media_type.startsWith("video/") ? (
         <video controls width="450">
           <source src={item.filename} type={item.media_type} />
           Your browser does not support the video tag.

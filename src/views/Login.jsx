@@ -1,11 +1,16 @@
-import LoginForm from '../components/LoginForm';
-import RegisterForm from '../components/RegisterForm';
+import { useState } from "react";
+import LoginForm from "../components/LoginForm";
+import RegisterForm from "../components/RegisterForm";
 
 const Login = () => {
+  const [showLogin, setShowLogin] = useState(true);
+
   return (
     <>
-      <LoginForm />
-      <RegisterForm />
+      {showLogin ? <LoginForm /> : <RegisterForm />}
+      <button type="button" onClick={() => setShowLogin(!showLogin)}>
+        {showLogin ? "Register" : "Login"}
+      </button>
     </>
   );
 };

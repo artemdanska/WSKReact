@@ -1,7 +1,9 @@
 import useForm from "../hooks/formHooks";
 import { useAuthentication } from "../hooks/apiHooks";
+import { useNavigate } from "react-router";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const { postLogin } = useAuthentication();
 
   const initValues = {
@@ -9,25 +11,24 @@ const LoginForm = () => {
     password: "",
   };
 
-  const doLogin = (inputs) => {
+  const doLogin = () => {
+    // gives warning for inputs variable, but its still needed
+    console.log(inputs);
     postLogin(inputs)
       .then((result) => {
         console.log("Login successful:", result);
         if (result.token) {
           localStorage.setItem("token", result.token);
+          navigate("/");
         }
       })
-      .catch((error) => {
-        console.error("Login failed:", error);
-      });
+      .catch((error) => console.error("Login failed:", error));
   };
 
   const { inputs, handleInputChange, handleSubmit } = useForm(
-    () => doLogin(inputs),
+    doLogin,
     initValues
   );
-
-  console.log(inputs);
 
   return (
     <>
